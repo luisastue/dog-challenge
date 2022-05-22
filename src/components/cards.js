@@ -5,16 +5,37 @@ export const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  max-width: 75vw;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+export const CardContainer = styled.div`
+  height: calc(15vw - 20px);
+  width: calc(15vw - 20px);
+  margin: 10px;
+  background-color: #dadada;
 `;
 
 export const Card = styled.div`
-background-color: #f0f0f0;
-height: calc(20vw - 20px);
-width: calc(20vw - 20px);
-padding: 10px;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 `;
 
+export const Image = styled.img`
+  max-height: 100%;
+  max-width: 100%;
+`
 
-export const PawCard = (props) => <Card>
-  <img src={paw} width='100%' height='100%' alt="paw" />
-</Card>
+export const PawCard = (props) => (
+  <CardContainer>
+    <Card>
+      <Image src={props.img ? props.img : paw} />
+    </Card>
+  </CardContainer>
+)
+
+export const EmptyCard = (props) => <CardContainer />

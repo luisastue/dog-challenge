@@ -1,16 +1,28 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
-import { Card, CardsWrapper, PawCard } from './components/cards';
+import { CardsWrapper, EmptyCard, PawCard } from './components/cards';
+import { getRandomDogs } from './redux/actions/dogActions';
 
-function App() {
+const App = () => {
+  const { memoryDogs } = useSelector((state) => state.dogState);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+      dispatch(getRandomDogs(10))
+  }, [])
+
+  useEffect(() => {
+    console.log(memoryDogs)
+}, [memoryDogs])
+
   return (
     <div className="App">
-      
+
       <CardsWrapper>
-        <PawCard/>
-        <PawCard/>
-        <PawCard/>
-        <PawCard/>
-        <PawCard/>
+        {memoryDogs.map((memoryDog) => (
+          <PawCard img={memoryDog}/>
+        ))}
       </CardsWrapper>
     </div>
   );
