@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import paw from '../logo512.png'
 
@@ -10,14 +11,14 @@ export const CardsWrapper = styled.div`
   margin-right: auto;
 `;
 
-export const CardContainer = styled.div`
+const CardContainer = styled.div`
   height: calc(15vw - 20px);
   width: calc(15vw - 20px);
   margin: 10px;
-  background-color: #dadada;
+  background-color: #f0f0f0;
 `;
 
-export const Card = styled.div`
+const Card = styled.div`
   height: 100%;
   width: 100%;
   align-items: center;
@@ -25,17 +26,22 @@ export const Card = styled.div`
   display: flex;
 `;
 
-export const Image = styled.img`
-  max-height: 100%;
-  max-width: 100%;
+const Image = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 `
-
-export const PawCard = (props) => (
-  <CardContainer>
-    <Card>
-      <Image src={props.img ? props.img : paw} />
-    </Card>
-  </CardContainer>
-)
+export const MemoryCard = (props) => {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  
+  return (
+    <CardContainer>
+      <Card>
+        <Image src={isOpen ? props.img : paw} onClick={() => setIsOpen(!isOpen)}/>
+      </Card>
+    </CardContainer>
+  )
+}
 
 export const EmptyCard = (props) => <CardContainer />
