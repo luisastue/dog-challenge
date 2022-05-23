@@ -3,13 +3,13 @@ Utilize the https://dog.ceo/dog-api/ to create a fun web app.
 
 ##Requirements:
 [x] npx create-react-app dog-challenge
-[ ] use redux
-[ ] fetch & display data from the dogs api
-[ ] react hooks
+[x] use redux
+[x] fetch & display data from the dogs api
+[x] react hooks
 
 ##Optional
 [ ] redux saga
-[ ] redux thunk
+[x] redux thunk
 [x] styled components
 [ ] react-router
   

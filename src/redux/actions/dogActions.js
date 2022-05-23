@@ -37,3 +37,11 @@ export const getRandomDogs = (nrOfDogs) => (dispatch, getState) => {
         });
 };
 
+export const removeDogPair = (id) => (dispatch) => {
+    console.log("removing ", id)
+    dispatch({
+        type: Constants.REMOVE_DOG_PAIR,
+        payload: id
+    })
+}
+
