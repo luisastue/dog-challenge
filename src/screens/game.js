@@ -4,7 +4,7 @@ import { CardsWrapper, MemoryCard } from '../components/cards';
 import { getRandomDogs, removeDogPair } from '../redux/actions/dogActions';
 
 
-const AllCards = ({dogs}) => {
+const Game = ({dogs}) => {
   const dispatch = useDispatch()
   const [firstRevealed, setFirstRevealed] = useState(null)
   const [secondRevealed, setSecondRevealed] = useState(null)
@@ -59,19 +59,6 @@ const AllCards = ({dogs}) => {
     </CardsWrapper>
   )
 
-}
-
-const Game = () => {
-    const { memoryDogs } = useSelector((state) => state.dogState);
-    const dispatch = useDispatch()
-  
-    useEffect(() => {
-        if(memoryDogs.length < 1) dispatch(getRandomDogs(10))
-      }, [])
-
-    return (
-      <AllCards dogs={memoryDogs} />
-    )
 }
 
 export default Game;
