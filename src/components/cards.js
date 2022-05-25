@@ -16,25 +16,22 @@ to {
 }
 `
 
-
 export const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  max-width: 75vw;
-  margin-left: auto;
-  margin-right: auto;
-  `;
+  width: 48vw;
+`;
 
-const CardGridElement = styled.div`
-  height: calc(15vw - 10px);
-  width: calc(15vw - 10px);
-  margin: 5px;
+export const CardGridElement = styled.div`
+  height: calc(12vw - 10px);
+  width: calc(12vw - 10px);
+  padding: 5px;
   border-radius: ${BORDER_RADIUS};
   perspective: 1000px;
 `;
 
-const Front = styled.div`
+export const Front = styled.div`
   border-radius: ${BORDER_RADIUS};
   animation-name: ${flipAnimation};
   animation-duration: 0.3s;
@@ -51,7 +48,7 @@ const Back = styled(Front)`
   background-color: #CFE1E1;
 `;
 
-const Image = styled.img`
+export const Image = styled.img`
   border-radius: ${BORDER_RADIUS};
   height: 100%;
   width: 100%;
@@ -60,8 +57,8 @@ const Image = styled.img`
 `;
 
 
-export const MemoryCard = forwardRef(({ img, id, revealAllowed, onReveal, isShown }, ref) => {
-  const [isRevealed, setIsRevealed] = useState(null)
+export const MemoryCard = forwardRef(({ img, id, revealAllowed, onReveal, isShown, revealed}, ref) => {
+  const [isRevealed, setIsRevealed] = useState(revealed)
 
   useImperativeHandle(ref, () => ({
     hide() {

@@ -1,26 +1,35 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardsWrapper, MemoryCard } from '../components/cards';
-import { getRandomDogs, removeDogPair } from '../redux/actions/dogActions';
+import { DogInfoCard, DogsWrapper } from '../components/dogs';
+import { removeDogPair } from '../redux/actions/gameActions';
+import styled from 'styled-components';
 
 
-const Game = ({dogs}) => {
+
+
+const GameContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 30px;
+  `;
+
+
+const Game = (props) => {
+  const { memoryDogs, revealedDogs } = useSelector((state) => state.gameState);
   const dispatch = useDispatch()
   const [firstRevealed, setFirstRevealed] = useState(null)
   const [secondRevealed, setSecondRevealed] = useState(null)
   const dogRefs = useRef([])
 
   useEffect(() => {
-    console.log("first in effect",firstRevealed)
-    console.log("second in effect", secondRevealed)
     if(secondRevealed!==null){
       hideOrRemoveCards(secondRevealed)
     }
   }, [secondRevealed])
 
   const hideOrRemoveCards = async (index) => {
-    console.log("first in hide",firstRevealed)
-    console.log("second in hide", secondRevealed)
     setTimeout(() => {
       if(firstRevealed === index) dispatch(removeDogPair(index))
       dogRefs.current.forEach((actions) => {
@@ -28,22 +37,21 @@ const Game = ({dogs}) => {
       })
       setFirstRevealed(null)
       setSecondRevealed(null)
+      if(revealedDogs.length === memoryDogs.length / 2) props.onEnd()
     }, 1500);
   }
 
   const handleReveal = (index) => {
-    console.log("first",firstRevealed)
-    console.log("second",secondRevealed)
     if(firstRevealed===null) setFirstRevealed(index)
     else if (secondRevealed===null) {
       setSecondRevealed(index)
     }
   }
 
-
   return (
+    <GameContainer>
       <CardsWrapper>
-      {dogs.map((dog, index) => {
+      {memoryDogs.map((dog, index) => {
         return (
         <MemoryCard 
           key={index} 
@@ -57,6 +65,19 @@ const Game = ({dogs}) => {
         )
       })}
     </CardsWrapper>
+    <DogsWrapper>
+    {revealedDogs.map((dog, index) => (
+          <>
+          <DogInfoCard 
+            dog={dog}
+            key={index+20} 
+            />
+          </>
+        )
+      )}
+
+    </DogsWrapper>
+    </GameContainer>
   )
 
 }

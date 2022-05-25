@@ -14,7 +14,7 @@ Utilize the https://dog.ceo/dog-api/ to create a fun web app.
 [ ] react-router
   
 ##Implement at least 3 of the following features:
-[ ] search dogs
+[x] search dogs
 [x] fiter dogs
 --> only play memory with one type of dogs
 [ ] "Favorite" dogs

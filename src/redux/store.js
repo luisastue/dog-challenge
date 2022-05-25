@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import dogReducer from './reducers/dogReducer'
 import breedReducer from './reducers/breedReducer'
+import gameReducer from './reducers/gameReducer'
 import { configureStore } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage';
 import {
@@ -21,6 +22,7 @@ const persistConfig = {
 const reducers = combineReducers({ 
   dogState: dogReducer,
   breedState: breedReducer,
+  gameState: gameReducer,
 });
 const persistedReducer = persistReducer(persistConfig, reducers)
 

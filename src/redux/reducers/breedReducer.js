@@ -14,20 +14,24 @@ const breedReducer = createReducer(initialState, (builder) => {
             state.loading = true
         })
         .addCase(Constants.GET_BREEDS_SUCCESS, (state, action) => {
-            let breedSubBreedList = Object.keys(action.payload).map((breed, index) =>
-                [{
+            let breedSubBreedList = {}
+            Object.keys(action.payload).map((breed, index) => {
+                breedSubBreedList[breed] = {
                     breed: breed,
                     subBreed: null,
                     name: breed.charAt(0).toUpperCase() + breed.slice(1),
                     path: breed,
-                }].concat(action.payload[breed].map((subBreed) => ({
+                }
+                action.payload[breed].map((subBreed) => {
+                    const path = breed + "/" + subBreed
+                    breedSubBreedList[path] = {
                         breed: breed,
                         subBreed: subBreed,
                         name: subBreed.charAt(0).toUpperCase() + subBreed.slice(1) + " " + breed.charAt(0).toUpperCase() + breed.slice(1),
-                        path: breed+"/"+subBreed
-                    })))
-                    
-            ).flat()
+                        path: path
+                    }
+                })
+            })
             state.breeds = breedSubBreedList
             state.subBreeds = action.payload;
             state.loading = false;
