@@ -1,6 +1,5 @@
 import * as Constants from '../constants';
 import { createReducer } from '@reduxjs/toolkit'
-import { getBreedFromImage } from '../../helpers/dataAnalyzer';
 
 const initialState = {
     memoryDogs: [],
@@ -16,11 +15,9 @@ const gameReducer = createReducer(initialState, (builder) => {
             let dogs = action.payload.map((dog, index) => {
                 return {
                     ...dog,
-                    id: index,
                     isInGame: true,
                 }
             })
-            console.log(dogs)
             dogs = dogs.concat(dogs);
             //shuffle the array
             dogs = dogs.sort(() => Math.random() - 0.5)

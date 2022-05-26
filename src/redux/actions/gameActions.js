@@ -1,6 +1,4 @@
-import dogApi from '../../helpers/dogApi';
 import * as Constants from '../constants';
-
 
 export const startGame = (dogs) => (dispatch) => {
     dispatch({
@@ -15,7 +13,6 @@ export const endGame = () => (dispatch) => {
 };
 
 export const removeDogPair = (id) => (dispatch) => {
-    console.log("removing ", id)
     dispatch({
         type: Constants.REMOVE_DOG_PAIR,
         payload: id

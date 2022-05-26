@@ -60,16 +60,12 @@ export const getDogsByBreed = (path, nrOfDogs) => (dispatch, getState) => {
         });
 };
 
-export const setFilters = (newFilters) => (dispatch, getState) => {
-    const currentFilters = getState().dogState.filters
-    console.log("current", currentFilters)
-    console.log("new", newFilters)
-    const filtersToFetch = Object.keys(newFilters).filter(filter => !currentFilters.includes(filter))
-    console.log("to fetch", filtersToFetch)
-    
+export const setFiltersAndGetDogs = (newFilters) => (dispatch) => {
+    const filtersToFetch = Object.keys(newFilters)
+
     dispatch({
         type: Constants.SET_FILTERS,
-        payload: Object.keys(newFilters),
+        payload: newFilters,
     })
     filtersToFetch.forEach(filter => dispatch(getDogsByBreed(filter, 10)))
 };

@@ -1,6 +1,6 @@
 import * as Constants from '../constants';
 import { createReducer } from '@reduxjs/toolkit'
-import { getBreedFromImage, getBreedFromPath } from '../../helpers/dataAnalyzer';
+import { getBreedFromImage } from '../../helpers/dataAnalyzer';
 
 const initialState = {
     dogsByBreed: {},
@@ -10,33 +10,33 @@ const initialState = {
     error: null
 };
 
+const getDogObject = (dogImage) => {
+    let {breed, subBreed, path} = getBreedFromImage(dogImage);
+    return {
+        image: dogImage,
+        breed: breed,
+        subBreed: subBreed,
+        path: path,
+        id: dogImage.slice(dogImage.lastIndexOf('/')+1),
+    }
+}
+
 const dogReducer = createReducer(initialState, (builder) => {
     builder
         .addCase(Constants.GET_DOGS_REQUEST, (state, action) => {
             state.loading = true
         })
         .addCase(Constants.GET_DOGS_BY_BREED_SUCCESS, (state, action) => {
-            const {breed, subBreed} = getBreedFromPath(action.payload.path);
             state.dogsByBreed[action.payload.path] = action.payload.dogs.map((dogImage, index) => {
-                return {
-                    image: dogImage,
-                    breed: breed,
-                    subBreed: subBreed,
-                    path: action.payload.path,
-                }
+                return getDogObject(dogImage)
             })
             state.loading = false
 
         })
         .addCase(Constants.GET_RANDOM_DOGS_SUCCESS, (state, action) => {
             state.randomDogs = action.payload.map((dogImage, index) => {
-                let {breed, subBreed, path} = getBreedFromImage(dogImage);
-                return {
-                    image: dogImage,
-                    breed: breed,
-                    subBreed: subBreed,
-                    path: path,
-                }
+                let dog = getDogObject(dogImage)
+                return {...dog, isRandom: true}
             })
             state.loading = false
         })
@@ -46,7 +46,7 @@ const dogReducer = createReducer(initialState, (builder) => {
         })
         .addCase(Constants.SET_FILTERS, (state, action) => {
             const newFilters = Object.keys(action.payload)
-            state.filters.map(breed => {
+            state.filters.forEach(breed => {
                 if(!newFilters.includes(breed)) delete state.dogsByBreed[breed]
             })
             state.filters = newFilters

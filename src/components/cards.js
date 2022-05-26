@@ -62,7 +62,6 @@ export const MemoryCard = forwardRef(({ img, id, revealAllowed, onReveal, isShow
 
   useImperativeHandle(ref, () => ({
     hide() {
-      console.log("set revealed: false")
       if (isRevealed) setIsRevealed(false)
     }
   }));

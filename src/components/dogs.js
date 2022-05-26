@@ -16,7 +16,7 @@ const DogInfo = styled.div`
   text-align: left;
   width: calc(10vw - 10px);
   word-wrap: break-word;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   color: white;
   position: absolute;
   padding: 1vw;
