@@ -3,7 +3,7 @@ Utilize the https://dog.ceo/dog-api/ to create a fun web app.
 
 ##Requirements:
 [x] npx create-react-app dog-challenge
-[x] use redux
+[x] use redux 
 [x] fetch & display data from the dogs api
 [x] react hooks
 
@@ -15,13 +15,11 @@ Utilize the https://dog.ceo/dog-api/ to create a fun web app.
   
 ##Implement at least 3 of the following features:
 [x] search dogs
-[x] fiter dogs
---> only play memory with one type of dogs
+[x] filter dogs
 [ ] "Favorite" dogs
 [ ] sort dogs
-[x] slick animations
-[x] handle loading
+[x] slick animations haha I tried...
+[ ] handle loading 
 
 
-https://developer.okta.com/blog/2020/03/16/react-styled-components
-
+Run `npm start` to start the app. :)

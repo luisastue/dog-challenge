@@ -25,7 +25,6 @@ const App = () => {
   }, [])
 
   return (
-    <div>
       <Container>
         <Header />
         {gameIsRunning 
@@ -33,7 +32,6 @@ const App = () => {
         : <CustomizeGameInputs/>
         }
       </Container>
-    </div>
   );
 }
 
